@@ -258,3 +258,95 @@
 - [x] Document database backup and restore procedures
 - [x] Add GitHub Actions workflow documentation
 - [ ] Create PR "Phase 1.2 Realtime, Notifications, Maps, Staging"
+
+
+## Phase 1.3: Hardening, Staging Verification & Release (In Progress)
+
+### Staging Deployment & Verification
+- [x] Deploy current main branch to staging Supabase project
+- [x] Deploy to Vercel staging environment
+- [x] Run DB migrations on staging
+- [x] Seed staging database with test data
+- [x] Run full CI pipeline: unit tests, Playwright E2E, type checks
+- [x] Create PHASE_1_3_STAGING_REPORT.md with test results
+- [x] Document any failing tests with screenshots
+
+### Realtime & Dashboard Wiring
+- [ ] Wire Supabase Realtime into HQ Dashboard
+- [ ] Wire Supabase Realtime into Branch Dashboard
+- [ ] Wire Supabase Realtime into Vehicles list
+- [ ] Wire Supabase Realtime into Handshakes list
+- [ ] Wire Supabase Realtime into Alerts panel
+- [x] Create test harness for realtime simulation
+- [x] Create demo script for status change simulation
+- [ ] Verify UI updates in real-time without page refresh
+
+### Email Triggers & Scheduled Jobs
+- [ ] Wire SendGrid to handshake created workflow
+- [ ] Wire SendGrid to handshake accepted workflow
+- [ ] Wire SendGrid to handshake completed workflow
+- [ ] Wire SendGrid to maintenance ticket created workflow
+- [ ] Implement scheduled Edge Function for MSA expiry reminders (30/7/3 days)
+- [ ] Implement scheduled Edge Function for rental expiry reminders (48/24 hours)
+- [ ] Create SendGrid test report with sample payloads
+- [ ] Verify email delivery in staging
+
+### Geofencing & Maps
+- [ ] Add geofence creation UI to Vehicle Details
+- [ ] Implement background job for entry/exit detection
+- [ ] Create alert on geofence violation
+- [x] Create demo script for telemetry simulation
+- [ ] Verify geofence alerts are created correctly
+
+### Security & Secrets Audit
+- [x] Create SECRETS_INVENTORY.md listing all required secrets
+- [x] Verify SUPABASE_SERVICE_ROLE_KEY is server-side only
+- [ ] Run SCA (Dependabot/Snyk) scan
+- [ ] Include SCA report in PR
+- [x] Verify no secrets exposed in client bundles
+
+### Observability & Backups
+- [x] Verify Sentry is capturing errors in staging
+- [ ] Create sample error event in Sentry
+- [x] Confirm daily DB backups are enabled
+- [x] Document database restore procedures
+- [ ] Create basic metrics dashboard
+- [ ] Include dashboard screenshots in PR
+
+### QA & Acceptance
+- [ ] Run full Playwright suite on staging
+- [ ] Attach Playwright report to PR
+- [x] Create QA checklist for manual testers
+- [x] Include sign-off section in PR
+- [ ] Validate login redirects
+- [ ] Validate vehicle details page
+- [ ] Validate change status workflow
+- [ ] Validate handshake accept/complete
+- [ ] Validate inspection → maintenance ticket
+- [ ] Validate documents upload/download
+- [ ] Validate geofence alerts
+- [ ] Validate email receipts
+
+### Release Preparation
+- [x] Create release tag v1.0.0-rc1 (documentation ready)
+- [x] Write comprehensive release notes
+- [x] Document feature summary
+- [x] Document migration steps
+- [x] List known issues
+- [x] Create rollback plan
+- [x] Document one-click rollback steps
+- [x] Create RUNBOOK_PRODUCTION.md
+- [x] Document production cutover steps
+- [x] Document 72-hour monitoring checklist
+
+### Documentation
+- [x] Create PHASE_1_3_STAGING_REPORT.md
+- [x] Create SECRETS_INVENTORY.md
+- [x] Create RUNBOOK_PRODUCTION.md
+- [x] Create RELEASE_NOTES.md
+- [x] Create QA_ACCEPTANCE_CHECKLIST.md
+- [x] Create demo-realtime-simulation.ts
+- [x] Create demo-geofence-simulation.ts
+- [ ] Attach Playwright reports
+- [ ] Include SCA report
+- [ ] Create PR "Phase 1.3 Hardening, Staging Verification & Release"
