@@ -1,25 +1,39 @@
-import { useState } from "react";
-import { useAuth } from "@/_core/hooks/useAuth";
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
+import { signInWithPassword, signInWithMagicLink, getCurrentUser } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { AlertCircle, Mail, Lock } from "lucide-react";
-import { useLocation } from "wouter";
+import { AlertCircle, Mail, Lock, Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 export default function Login() {
   const [, setLocation] = useLocation();
-  const { user, loading } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [mode, setMode] = useState<"password" | "magic-link">("password");
 
-  // Redirect if already logged in
-  if (user && !loading) {
-    setLocation("/dashboard");
-    return null;
-  }
+  // Check if user is already logged in
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const user = await getCurrentUser();
+        if (user) {
+          // Redirect based on role (would need to fetch from DB)
+          setLocation("/dashboard");
+        }
+      } catch (err) {
+        console.error("Auth check error:", err);
+      } finally {
+        setIsCheckingAuth(false);
+      }
+    };
+
+    checkAuth();
+  }, [setLocation]);
 
   const handlePasswordLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,10 +41,23 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      // This would integrate with Supabase Auth
-      // For now, show a placeholder
-      console.log("Login attempt:", { email, password });
-      setError("Authentication not yet configured. Please use the dashboard.");
+      if (!email || !password) {
+        setError("Please enter both email and password");
+        return;
+      }
+
+      const { data, error: authError } = await signInWithPassword(email, password);
+
+      if (authError) {
+        setError(authError.message || "Login failed");
+        return;
+      }
+
+      if (data.user) {
+        toast.success("Login successful!");
+        // Redirect based on role (would need to fetch from DB)
+        setLocation("/dashboard");
+      }
     } catch (err: any) {
       setError(err.message || "Login failed");
     } finally {
@@ -44,15 +71,37 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      // This would integrate with Supabase Auth
-      console.log("Magic link sent to:", email);
-      setError("Magic link feature not yet configured.");
+      if (!email) {
+        setError("Please enter your email");
+        return;
+      }
+
+      const { error: authError } = await signInWithMagicLink(email);
+
+      if (authError) {
+        setError(authError.message || "Failed to send magic link");
+        return;
+      }
+
+      toast.success("Magic link sent! Check your email.");
+      setEmail("");
     } catch (err: any) {
       setError(err.message || "Failed to send magic link");
     } finally {
       setIsLoading(false);
     }
   };
+
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="flex items-center gap-2">
+          <Loader2 className="h-5 w-5 animate-spin" />
+          <span>Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
@@ -95,6 +144,7 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   className="pl-10"
                   required
+                  disabled={isLoading}
                 />
               </div>
             </div>
@@ -111,6 +161,7 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                     className="pl-10"
                     required
+                    disabled={isLoading}
                   />
                 </div>
               </div>
@@ -121,7 +172,16 @@ export default function Login() {
               className="w-full"
               disabled={isLoading}
             >
-              {isLoading ? "Loading..." : mode === "password" ? "Sign In" : "Send Magic Link"}
+              {isLoading ? (
+                <>
+                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  {mode === "password" ? "Signing in..." : "Sending..."}
+                </>
+              ) : mode === "password" ? (
+                "Sign In"
+              ) : (
+                "Send Magic Link"
+              )}
             </Button>
           </form>
 
@@ -137,14 +197,19 @@ export default function Login() {
           <Button
             variant="outline"
             className="w-full"
-            onClick={() => setMode(mode === "password" ? "magic-link" : "password")}
+            onClick={() => {
+              setMode(mode === "password" ? "magic-link" : "password");
+              setError("");
+              setPassword("");
+            }}
             type="button"
+            disabled={isLoading}
           >
             {mode === "password" ? "Use Magic Link" : "Use Password"}
           </Button>
 
           <p className="text-xs text-center text-muted-foreground">
-            Demo credentials available in the documentation
+            Demo credentials: test@example.com / password123
           </p>
         </CardContent>
       </Card>
