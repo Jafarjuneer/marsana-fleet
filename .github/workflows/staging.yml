@@ -8,6 +8,11 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+  workflows: write
+  pull-requests: write
+
 env:
   VITE_SUPABASE_URL: ${{ secrets.STAGING_SUPABASE_URL }}
   VITE_SUPABASE_ANON_KEY: ${{ secrets.STAGING_SUPABASE_ANON_KEY }}
