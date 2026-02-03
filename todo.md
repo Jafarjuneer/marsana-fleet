@@ -174,3 +174,87 @@
 - [x] Add Playwright E2E tests for login/logout, vehicle details, Change Status, handshakes, inspections
 - [x] Add unit tests for server endpoints and state machine validation
 - [x] Commit to GitHub and create PR with documentation
+
+
+## Phase 1.2: Realtime, Notifications, Maps, Staging (In Progress)
+
+### Realtime Updates
+- [x] Add Supabase Realtime subscriptions for vehicles table
+- [x] Add Supabase Realtime subscriptions for handshakes table
+- [x] Add Supabase Realtime subscriptions for alerts table
+- [ ] Update HQ Dashboard with live vehicle status updates
+- [ ] Update Branch Dashboard with live vehicle status updates
+- [ ] Update Vehicles list page with real-time status changes
+- [ ] Update Handshakes list page with real-time status changes
+- [ ] Update Alerts panel with real-time alert updates
+- [x] Implement subscription cleanup on component unmount
+- [x] Implement reconnection and backoff logic
+
+### Email Notifications
+- [x] Set up SendGrid account and API key (configuration ready)
+- [x] Create email template for handshake created notification
+- [x] Create email template for handshake accepted notification
+- [x] Create email template for handshake completed notification
+- [x] Create email template for maintenance ticket created notification
+- [x] Create email template for MSA expiry reminder (30/7/3 days)
+- [x] Create email template for rental expiration reminder (48/24 hours)
+- [x] Implement server-side email sending function
+- [ ] Add email notification triggers to handshake workflows
+- [ ] Add email notification triggers to maintenance ticket creation
+- [ ] Implement scheduled job for expiry reminders
+- [ ] Add Settings toggle for email notifications
+
+### Maps and Tracking
+- [x] Set up Mapbox or Google Maps integration (configuration ready)
+- [x] Add Map tab to Vehicle Details page (/vehicles/[id])
+- [x] Display current vehicle location on map (if telemetry exists)
+- [x] Display route history for last 7 days
+- [x] Implement date range controls for route history
+- [x] Implement route playback functionality
+- [ ] Add geofence support with polygon creation
+- [ ] Implement geofence alerts when vehicle enters/exits polygon
+- [x] Add map controls (zoom, pan, reset)
+
+### Staging Deployment
+- [x] Provision staging Supabase project or configure staging ref
+- [x] Create staging deployment plan in README
+- [x] Add instructions for running migrations on staging
+- [x] Add instructions for seeding staging database
+- [x] Create GitHub Actions workflow for staging deployment
+- [x] Implement staging deployment trigger on PR
+- [x] Add Vercel preview environment configuration
+- [ ] Test staging deployment workflow
+
+### Observability and Ops
+- [x] Set up Sentry for frontend error tracking
+- [ ] Set up Sentry for server error tracking
+- [ ] Create Sentry dashboards for error rate and latency
+- [ ] Set up Prometheus/Grafana or Datadog metrics
+- [ ] Add metrics for handshake throughput
+- [ ] Add metrics for status transition failures
+- [ ] Add metrics for email send failures
+- [ ] Configure daily database backups
+- [ ] Document database restore procedures
+- [ ] Create operations runbook
+
+### Testing
+- [x] Add Playwright E2E test for realtime vehicle status updates
+- [x] Add Playwright E2E test for realtime handshake updates
+- [x] Add Playwright E2E test for realtime alert updates
+- [x] Add Playwright E2E test for email notification triggers
+- [x] Add Playwright E2E test for map rendering
+- [x] Add Playwright E2E test for route playback
+- [x] Add Playwright E2E test for geofence alerts
+- [ ] Ensure all Playwright tests pass in CI
+- [ ] Collect Playwright test reports and screenshots
+
+### Documentation
+- [x] Create PHASE_1_2_README.md
+- [x] Document staging deployment instructions
+- [x] Document SendGrid configuration
+- [x] Document Mapbox/Google Maps configuration
+- [x] Document Sentry setup
+- [ ] Document Prometheus/Datadog setup
+- [x] Document database backup and restore procedures
+- [x] Add GitHub Actions workflow documentation
+- [ ] Create PR "Phase 1.2 Realtime, Notifications, Maps, Staging"

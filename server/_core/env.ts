@@ -10,4 +10,8 @@ export const ENV = {
   supabaseUrl: process.env.VITE_SUPABASE_URL ?? "",
   supabaseAnonKey: process.env.VITE_SUPABASE_ANON_KEY ?? "",
   supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY ?? "",
+  sendgridApiKey: process.env.SENDGRID_API_KEY ?? "",
+  sendgridFromEmail: process.env.SENDGRID_FROM_EMAIL ?? "noreply@marsana.com",
+  mapboxAccessToken: process.env.VITE_MAPBOX_ACCESS_TOKEN ?? "",
+  sentryDsn: process.env.VITE_SENTRY_DSN ?? "",
 };
