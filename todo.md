@@ -153,3 +153,24 @@
 
 ## Completed Items
 (None yet)
+
+## Phase 1.1: Auth, Vehicle Details, and Handshakes/Inspections (Priority)
+- [x] Integrate Supabase Auth with email/password and magic link (auth middleware created)
+- [x] Map auth.uid() to users.id in database (sync function implemented)
+- [ ] Add server session handling and client session refresh
+- [ ] Implement role-based redirect after login (super_admin/hq -> /dashboard/hq, branch_admin -> /dashboard/branch, driver -> /driver)
+- [ ] Create protected route wrapper with role-based access enforcement
+- [x] Build login page UI with error handling
+- [ ] Add logout modal with Confirm/Cancel behavior
+- [x] Create Vehicle Details page (/vehicles/[id]) with tabs (Overview, Documents, Service History, Telemetry, Movement History)
+- [x] Implement Change Status modal with state machine validation and reason field
+- [ ] Create server endpoint POST /api/vehicles/:id/change-status with transactional logic
+- [ ] Implement Documents tab with upload/download/delete via Supabase Storage
+- [x] Build Handshakes list page with Create form and Incoming cards
+- [x] Implement Accept Handshake transactional flow (update status, set IN_TRANSIT, audit log, notify)
+- [x] Implement Complete Handshake flow (update status, change branch, set PENDING_INSPECTION)
+- [x] Build Inspections form with checklist, photo upload, and result selection
+- [x] Implement automatic maintenance ticket and alert creation for DAMAGE/SERVICE_DUE
+- [ ] Add Playwright E2E tests for login/logout, vehicle details, Change Status, handshakes, inspections
+- [ ] Add unit tests for server endpoints and state machine validation
+- [ ] Commit to GitHub and create PR with documentation

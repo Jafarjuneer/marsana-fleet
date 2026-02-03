@@ -7,13 +7,21 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import Vehicles from "./pages/Vehicles";
+import VehicleDetails from "./pages/VehicleDetails";
+import Login from "./pages/Login";
+import Handshakes from "./pages/Handshakes";
+import Inspections from "./pages/Inspections";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/login" component={Login} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/vehicles" component={Vehicles} />
+      <Route path="/vehicles/:id" component={VehicleDetails} />
+      <Route path="/handshakes" component={Handshakes} />
+      <Route path="/inspections" component={Inspections} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
