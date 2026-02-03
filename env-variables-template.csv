@@ -1,0 +1,20 @@
+Variable Name,Value,Description,Required,Environment
+VITE_SUPABASE_URL,https://your-project.supabase.co,Supabase project URL,Yes,Production|Preview|Development
+VITE_SUPABASE_ANON_KEY,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...,Supabase anonymous key,Yes,Production|Preview|Development
+SUPABASE_SERVICE_ROLE_KEY,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...,Supabase service role key (server-side only),Yes,Production|Preview|Development
+VITE_APP_ID,your-manus-app-id,Manus OAuth application ID,Yes,Production|Preview|Development
+JWT_SECRET,your-jwt-secret-key-min-32-chars-long,JWT signing secret (min 32 characters),Yes,Production|Preview|Development
+OAUTH_SERVER_URL,https://api.manus.im,Manus OAuth server URL,Yes,Production|Preview|Development
+OWNER_OPEN_ID,your-owner-open-id,Owner's Manus Open ID,Yes,Production|Preview|Development
+OWNER_NAME,Your Name,Owner's display name,Yes,Production|Preview|Development
+BUILT_IN_FORGE_API_URL,https://api.manus.im,Manus Forge API URL,Yes,Production|Preview|Development
+BUILT_IN_FORGE_API_KEY,your-forge-api-key,Manus Forge API key (server-side),Yes,Production|Preview|Development
+VITE_FRONTEND_FORGE_API_URL,https://api.manus.im,Manus Forge API URL for frontend,Yes,Production|Preview|Development
+VITE_FRONTEND_FORGE_API_KEY,your-frontend-forge-api-key,Manus Forge API key for frontend,Yes,Production|Preview|Development
+SENDGRID_API_KEY,SG.your-sendgrid-api-key,SendGrid API key for email notifications,Yes,Production|Preview|Development
+SENDGRID_FROM_EMAIL,noreply@marsana.com,SendGrid from email address,No,Production|Preview|Development
+VITE_MAPBOX_ACCESS_TOKEN,pk.your-mapbox-access-token,Mapbox access token for maps,Yes,Production|Preview|Development
+VITE_SENTRY_DSN,https://your-sentry-dsn@sentry.io/your-project-id,Sentry DSN for error tracking,Yes,Production|Preview|Development
+VITE_ANALYTICS_ENDPOINT,https://analytics.example.com,Analytics endpoint URL,No,Production|Preview|Development
+VITE_ANALYTICS_WEBSITE_ID,your-website-id,Analytics website ID,No,Production|Preview|Development
+VITE_OAUTH_PORTAL_URL,https://portal.manus.im,Manus OAuth portal URL,No,Production|Preview|Development
