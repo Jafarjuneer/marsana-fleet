@@ -13,7 +13,32 @@
       "maxDuration": 60
     }
   },
+  "rewrites": [{
+  "buildCommand": "pnpm build",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "outputDirectory": "dist",
+  "framework": "node",
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "regions": ["sfo1"],
+  "functions": {
+    "server/_core/index.ts": {
+      "runtime": "nodejs22.x",
+      "maxDuration": 60
+    }
+  },
   "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+  }
     {
       "source": "/api/(.*)",
       "destination": "/api/$1"
